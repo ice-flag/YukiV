@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  reference_number: MyString
+  asmeth: MyString
+  price: 9.99
+  item_type: MyString
+  bosal: MyString
+  walker: MyString
+  ets: MyString
+
+two:
+  reference_number: MyString
+  asmeth: MyString
+  price: 9.99
+  item_type: MyString
+  bosal: MyString
+  walker: MyString
+  ets: MyString
