@@ -50,7 +50,7 @@ class ProductsPdf < Prawn::Document
       end
 
       grid([5,2], [7,4]).bounding_box do
-        print_qr_code("http://order.ap-onderdelen.nl/products/#{product.id}")
+        print_qr_code("http://order.ap-onderdelen.nl/products/#{product.id}/activate")
       end
 
       start_new_page

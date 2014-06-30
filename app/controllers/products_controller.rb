@@ -1,8 +1,11 @@
 class ProductsController < ApplicationController
+  before_filter :find_product, :only => [:show, :activate, :location, :edit, :update, :destroy]
+
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = Product.where(:active => false)
+    @all_products = Product.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,10 +19,22 @@ class ProductsController < ApplicationController
     end
   end
 
+  def activate
+    if @product.active?
+      redirect_to product_path(@product)
+    else
+      Product.update(@product.id, active: true)
+        redirect_to location_product_path(@product)
+    end
+  end
+
+  def location
+    
+  end
+
   # GET /products/1
   # GET /products/1.json
   def show
-    @product = Product.find(params[:id])
     @item = Item.find(@product.item_id)
     @qr = RQRCode::QRCode.new("#{request.original_url}", :size => 4, :level => :l )
 
@@ -48,7 +63,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
-    @product = Product.find(params[:id])
+
   end
 
   # POST /products
@@ -58,7 +73,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
+        format.html { redirect_to item_path(@product.item_id), notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
         format.html { render action: "new" }
@@ -70,7 +85,6 @@ class ProductsController < ApplicationController
   # PUT /products/1
   # PUT /products/1.json
   def update
-    @product = Product.find(params[:id])
 
     respond_to do |format|
       if @product.update_attributes(params[:product])
@@ -86,12 +100,16 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
 
     respond_to do |format|
       format.html { redirect_to products_url }
       format.json { head :no_content }
     end
+  end
+
+private
+  def find_product
+    @product = Product.find(params[:id])
   end
 end

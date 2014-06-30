@@ -1,5 +1,10 @@
 YukiV::Application.routes.draw do
-  resources :products
+  resources :products do
+    member do
+      get "activate"
+      get "location"
+    end
+  end
 
 
   resources :items do

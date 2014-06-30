@@ -3,27 +3,33 @@
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
-  <dd><%= @product.status %></dd>
-</dl>
+<p>
+  <strong>Status: </strong><%= @product.status_output %>
+</p>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:reference_number) %>:</strong></dt>
-  <dd><%= Item.find(@product.item_id).reference_number %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:asmeth) %>:</strong></dt>
-  <dd><%= Item.find(@product.item_id).asmeth %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
-  <dd><%= Item.find(@product.item_id).price %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:item_type) %>:</strong></dt>
-  <dd><%= Item.find(@product.item_id).item_type %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:bosal) %>:</strong></dt>
-  <dd><%= Item.find(@product.item_id).bosal %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:walker) %>:</strong></dt>
-  <dd><%= Item.find(@product.item_id).walker %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:ets) %>:</strong></dt>
-  <dd><%= Item.find(@product.item_id).ets %></dd>
-</dl>
+<p>
+  <strong>Magazijnlocatie: </strong><%= @product.location %>
+</p>
+
+<hr />
+
+<ul>
+  <li><strong>Referentienummer:</strong> <%= Item.find(@product.item_id).reference_number %></li>
+  <li>Asmet: <%= Item.find(@product.item_id).asmeth %></li>
+  <li>Bosal: <%= Item.find(@product.item_id).bosal %></li>
+  <li>Walker: <%= Item.find(@product.item_id).walker %></li>
+  <li>ETS: <%= Item.find(@product.item_id).ets %></li>
+</ul>
+
+<hr />
+
+<p>
+  <strong>Inkoopprijs: </strong><%= Item.find(@product.item_id).price %>
+</p>
+
+<p>
+  <strong>Product type: </strong><%= Item.find(@product.item_id).item_type %>
+</p>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

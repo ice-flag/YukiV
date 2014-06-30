@@ -6,6 +6,16 @@
 <% end %>
 
 <%- model_class = Item -%>
+
+<hr />
+<h4>Quick search</h4>
+<%= form_tag('/items', method: :get) do %>
+
+<%= text_field_tag :search %>
+<%= submit_tag "search" %>
+
+<% end %>
+
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>

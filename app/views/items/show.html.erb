@@ -31,7 +31,7 @@
 <% @item.products.each do |product| %>
   <tr>
     <td><%= link_to product.id, product %></td>
-    <td><%= product.status %></td>
+    <td><%= product.status_output %></td>
     <td>ADP1</td>    
   </tr>
 <% end %>
@@ -40,6 +40,7 @@
 <%= form_for @product, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.hidden_field :item_id, :value => @item.id %>
   <%= f.hidden_field :status, :value => 1 %>
+  <%= f.hidden_field :active, :value => false %>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
