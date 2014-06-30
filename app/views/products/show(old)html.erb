@@ -1,0 +1,56 @@
+<%- model_class = Product -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
+  <dd><%= @product.status %></dd>
+</dl>
+
+<style type="text/css">
+table {
+  border-width: 0;
+  border-style: none;
+  border-color: #0000ff;
+  border-collapse: collapse;
+}
+td {
+  border-width: 0; 
+  border-style: none;
+  border-color: #0000ff; 
+  border-collapse: collapse; 
+  padding: 0; 
+  margin: 0; 
+  width: 10px; 
+  height: 10px; 
+}
+td.black { background-color: #000; }
+td.white { background-color: #fff; }
+</style>
+
+<table>
+<% @qr.modules.each_index do |x| %>
+  <tr>  
+  <% @qr.modules.each_index do |y| %>
+   <% if @qr.dark?(x,y) %>
+    <td class="black"/>
+   <% else %>
+    <td class="white"/>
+   <% end %>
+  <% end %>
+  </tr>
+<% end %>
+</table>
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              item_path(@product.item_id), :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_product_path(@product), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              product_path(@product),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>
