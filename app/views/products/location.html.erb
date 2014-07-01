@@ -1,5 +1,13 @@
 <h4>Voeg magazijnlocatie toe</h4>
 
+<ul>
+  <li><strong>Referentienummer:</strong> <%= Item.find(@product.item_id).reference_number %></li>
+  <li>Asmet: <%= Item.find(@product.item_id).asmeth %></li>
+  <li>Bosal: <%= Item.find(@product.item_id).bosal %></li>
+  <li>Walker: <%= Item.find(@product.item_id).walker %></li>
+  <li>ETS: <%= Item.find(@product.item_id).ets %></li>
+</ul>
+
 <%= form_for @product, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.hidden_field :status, :value => 2 %>
   <div class="control-group">
@@ -10,8 +18,8 @@
   </div>
 
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                products_path, :class => 'btn' %>
+    <%= f.submit "Voeg toe", :class => 'btn btn-primary' %>
+    <%= link_to "Annuleer",
+                product_path(@product), :class => 'btn' %>
   </div>
 <% end %>

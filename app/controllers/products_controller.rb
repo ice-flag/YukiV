@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
   end
 
   def activate
-    if @product.active?
+    if @product.active? && @product.location.present?
       redirect_to product_path(@product)
     else
       Product.update(@product.id, active: true)
