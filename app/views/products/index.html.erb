@@ -3,7 +3,7 @@
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 
-<h4>Inactieve producten</h4>
+<h4>Inactieve producten ( <%= link_to "download labels", products_path(format: "pdf"), :class => "btn btn-primary btn-mini" %> )</h4>
 
 <table class="table table-striped">
   <thead>

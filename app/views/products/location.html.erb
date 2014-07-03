@@ -1,3 +1,28 @@
+<h4>Alle producten</h4>
+<p>Je huidige product is groen geselecteerd.</p>
+<table class="table table-bordered">
+  <tr>
+    <th>id</th>
+    <th>Status</th>
+    <th>Magazijnlocatie</th>
+  </tr>
+  <% Item.find(@product.item_id).products.each do |product| %>
+      <% if product.id == @product.id %>
+        <tr class="success">
+          <td><%= link_to product.id, product %></td>
+          <td><%= product.status_output %></td>
+          <td><%= product.location %></td>    
+        </tr>
+      <% else %>
+        <tr>
+          <td><%= link_to product.id, product %></td>
+          <td><%= product.status_output %></td>
+          <td><%= product.location %></td>    
+        </tr>
+      <% end %>
+  <% end %>
+</table>
+
 <h4>Voeg magazijnlocatie toe</h4>
 
 <ul>
