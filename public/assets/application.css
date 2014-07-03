@@ -4819,6 +4819,11 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+body {
+  padding-top: 60px;
+  padding-left: 1%;
+  padding-right: 1%;
+}
 /*!
  * Bootstrap Responsive v2.3.2
  *
