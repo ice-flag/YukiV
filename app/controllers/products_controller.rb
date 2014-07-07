@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.where(:active => false)
+    @products = Product.where("active = ? AND location IS NULL",false)
     @all_products = Product.all
 
     respond_to do |format|
