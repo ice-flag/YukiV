@@ -8,6 +8,8 @@
 <%- model_class = Item -%>
 
 <hr />
+  <p><%= link_to "Download ref list", items_path(format: "csv") %></p>
+<hr />
 <h4>Quick search</h4>
 <%= form_tag('/items', method: :get) do %>
 

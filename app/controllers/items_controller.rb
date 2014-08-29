@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
   def index
     if params[:search]
       @items = Item.search(params[:search]).order("created_at DESC")
+      @csv_items = Item.all.order("id ASC")
     else
       @items = []
     end
@@ -11,6 +12,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @items }
+      format.csv
     end
   end
 
