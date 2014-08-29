@@ -2,7 +2,7 @@
 <% @csv_items.each do |item| %>
 <% if item.products.present? %>
 <% item.products.each do |product| %>  
-"<%= item.id %>","ETS<%= item.ets %>","<%= item.asmeth %>","<%= item.count %>"
+"<%= item.id %>","ETS<%= item.ets %>","<%= item.asmeth %>","<%= item.products.count %>"
 <% end -%>
 <% end -%>
 <% end -%>
