@@ -1,8 +1,8 @@
-"id","sku","asmet","# products"
+"id","reference_number","sku","asmet","# products","safety stock","bij te bestellen"
 <% @csv_items.each do |item| %>
 <% if item.products.present? %>
 <% item.products.each do |product| %>  
-"<%= item.id %>","ETS<%= item.ets %>","<%= item.asmeth %>","<%= item.products.count %>"
+"<%= item.id %>","<%= item.reference_number %>","ETS<%= item.ets %>","<%= item.asmeth %>","<%= item.products.count %>","7","<%= 7 - item.products.count %>"
 <% end -%>
 <% end -%>
 <% end -%>
