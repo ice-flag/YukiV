@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
       @csv_items = Item.order("id ASC")
     elsif params[:psearch]
       @items = Item.psearch(params[:psearch]).order("created_at DESC")
-      @item = Item.search(params[:psearch]).first
+      @item = Item.psearch(params[:psearch]).first
       @csv_items = Item.order("id ASC")
       @product = Product.new
     else
