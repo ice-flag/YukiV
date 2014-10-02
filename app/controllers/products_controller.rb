@@ -74,7 +74,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       if params[:psearch]
         @product.save
-          format.html { redirect_to items_path, notice: 'Product is toegevoegd chef!' }
+          format.html { redirect_to scan_items_incoming_path, notice: 'Product is toegevoegd chef!' }
       else
         if @product.save
           format.html { redirect_to item_path(@product.item_id), notice: 'Product was successfully created.' }
@@ -92,12 +92,18 @@ class ProductsController < ApplicationController
   def update
 
     respond_to do |format|
-      if @product.update_attributes(params[:product])
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-        format.json { head :no_content }
+      if params[:warehouse_in]
+        @product.update_attributes(params[:product])
+          format.html { redirect_to scan_items_warehouse_in_path, notice: 'Locatie is toegevoegd chef!' }
+          format.json { head :no_content }          
       else
-        format.html { render action: "edit" }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+        if @product.update_attributes(params[:product])
+          format.html { redirect_to @product, notice: 'Jazeker! Product is geupdeeeeet.' }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @product.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

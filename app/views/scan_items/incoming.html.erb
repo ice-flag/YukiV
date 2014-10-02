@@ -1,0 +1,43 @@
+<h1>Programma inkomend</h1>
+
+<h4>Asmet ean</h4>
+<%= form_tag('/scan_items/incoming', method: :get) do %>
+
+<%= text_field_tag :psearch, '', autofocus: true %>
+<%= submit_tag "search" %>
+
+<% end %>
+
+<hr />
+
+<%- model_class = Item -%>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:reference_number) %></th>
+      <th>Aantal</th>
+      <th>ean</th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td><%= link_to item.id, item_path(item) %></td>
+        <td><%= item.reference_number %></td>
+        <td><%= item.products.count %></td>
+        <td><%= item.ean %></td>
+        <td>
+          <%= form_for @product, :html => { :class => 'form-horizontal' } do |f| %>
+            <%= f.hidden_field :item_id, :value => @item.id %>
+            <%= f.hidden_field :status, :value => 1 %>
+            <%= f.hidden_field :active, :value => false %>
+            <%= f.submit "Voeg nieuw product toe", :name => "psearch", :class => 'btn btn-primary' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

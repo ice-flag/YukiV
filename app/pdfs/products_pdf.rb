@@ -1,3 +1,7 @@
+require 'barby'
+require 'barby/barcode/code_39'
+require 'barby/outputter/prawn_outputter'
+
 class ProductsPdf < Prawn::Document
   def initialize(products)
     super(top_margin: 70)
@@ -10,9 +14,23 @@ class ProductsPdf < Prawn::Document
     define_grid(:columns => 5, :rows => 8, :gutter => 10)
   end
 
+  # def barcode
+  #   barcode = Barby::Code39.new @product.id.to_s
+  #   barcode.annotate_pdf(self)
+  # end
+
   def label_pages
     define_grid(:columns => 5, :rows => 8, :gutter => 10)
     @products.each do |product|
+      grid([-1,0], [-1,1]).bounding_box do
+        barcode = Barby::Code39.new product.id.to_s
+        barcode.annotate_pdf(self)
+      end
+
+      grid([-0.5,4], [-0.5,4]).bounding_box do
+        text "ID: #{product.id.to_s}", size: 14, :align => :right
+      end
+
       grid([0,0], [1,4]).bounding_box do
         text "AP AUTO ONDERDELEN", :align => :center, size: 34, style: :bold
         text "De auto onderdelen discounter van Nederland", :align => :center, style: :bold, size: 24
@@ -42,6 +60,8 @@ class ProductsPdf < Prawn::Document
       # end
 
       grid([5,0], [7,1]).bounding_box do
+        barcode = Barby::Code39.new product.id.to_s
+        barcode.annotate_pdf(self)
         text "Product code:", :align => :center, size: 34
         move_down 15
         text "#{Item.find(product.item_id).reference_number}", :align => :center, size: 40, style: :bold

@@ -20,6 +20,14 @@
           <ul class="nav">
             <li><%= link_to "Referentie lijst", items_path %></li>
             <li><%= link_to "Producten", products_path %></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" id="drop3" role="button" data-toggle="dropdown" href="#">Programmas<b class="caret"></b></a>
+              <ul id="menu0" class="dropdown-menu" role="menu" aria-labelledby="drop3">
+                <li role="presentation"><%= link_to "Inkomend", scan_items_incoming_path, "role" => "menuitem", "tabindex" => "-1" %></li>
+                <li role="presentation"><%= link_to "In magazijn", scan_items_warehouse_in_path , "role" => "menuitem", "tabindex" => "-1" %></li>
+                <li role="presentation"><%= link_to "Uit magazijn", scan_items_warehouse_out_path, "role" => "menuitem", "tabindex" => "-1" %></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>

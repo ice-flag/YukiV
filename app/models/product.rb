@@ -16,4 +16,9 @@ class Product < ActiveRecord::Base
   		"Pizza"
   	end
   end
+
+  # for scan warehouse_in search
+  def self.search(query)
+    find("#{query}")
+  end
 end

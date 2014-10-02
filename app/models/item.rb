@@ -29,6 +29,6 @@ class Item < ActiveRecord::Base
 		# Postgres
 		where("ean ilike ?", "%#{query}%")
 		# sqlite3
-		where("ean like ?", "%#{query}%")
+		# where("ean like ?", "%#{query}%")
 	end
 end

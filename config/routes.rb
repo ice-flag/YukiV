@@ -1,4 +1,10 @@
 YukiV::Application.routes.draw do
+  get "scan_items/incoming"
+
+  get "scan_items/warehouse_in"
+
+  get "scan_items/warehouse_out"
+
   resources :products do
     member do
       get "activate"
