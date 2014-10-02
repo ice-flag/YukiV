@@ -72,12 +72,17 @@ class ProductsController < ApplicationController
     @product = Product.new(params[:product])
 
     respond_to do |format|
-      if @product.save
-        format.html { redirect_to item_path(@product.item_id), notice: 'Product was successfully created.' }
-        format.json { render json: @product, status: :created, location: @product }
+      if params[:psearch]
+        @product.save
+          format.html { redirect_to items_path, notice: 'Product is toegevoegd chef!' }
       else
-        format.html { render action: "new" }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+        if @product.save
+          format.html { redirect_to item_path(@product.item_id), notice: 'Product was successfully created.' }
+          format.json { render json: @product, status: :created, location: @product }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @product.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

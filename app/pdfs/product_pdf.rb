@@ -1,3 +1,7 @@
+require 'barby'
+require 'barby/barcode/code_39'
+require 'barby/outputter/prawn_outputter'
+
 class ProductPdf < Prawn::Document
   def initialize(product, item)
     super(top_margin: 70)
@@ -6,6 +10,7 @@ class ProductPdf < Prawn::Document
 
     title
     print_qr_code(qr_content)
+    barcode
   end
 
   def title
@@ -98,5 +103,10 @@ class ProductPdf < Prawn::Document
         pos_y = pos_y - dot
       end
     end
+  end
+
+  def barcode
+    barcode = Barby::Code39.new @product.id.to_s
+    barcode.annotate_pdf(self)
   end
 end

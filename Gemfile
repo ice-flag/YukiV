@@ -33,6 +33,9 @@ gem 'jquery-rails'
 # For generating QR codes
 gem 'rqrcode'
 
+# For generation Barcodes
+gem 'barby', '~> 0.6.1'
+
 gem 'prawn'
 
 # To use ActiveModel has_secure_password

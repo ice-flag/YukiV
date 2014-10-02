@@ -5,6 +5,11 @@ class ItemsController < ApplicationController
     if params[:search]
       @items = Item.search(params[:search]).order("created_at DESC")
       @csv_items = Item.order("id ASC")
+    elsif params[:psearch]
+      @items = Item.psearch(params[:psearch]).order("created_at DESC")
+      @item = Item.search(params[:psearch]).first
+      @csv_items = Item.order("id ASC")
+      @product = Product.new
     else
       @items = []
       @csv_items = Item.order("id ASC")
@@ -28,6 +33,7 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @product = Product.new
+    @barcode = Barby::Code39.new @item.id.to_s
 
     respond_to do |format|
       format.html # show.html.erb
