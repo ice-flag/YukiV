@@ -19,15 +19,15 @@ class Item < ActiveRecord::Base
 	# for quick search
 	def self.search(query)
 		# Postgres
-		# where("reference_number ilike ? OR asmeth ilike ? OR bosal ilike ? OR walker ilike ? OR ets ilike ?", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+		where("reference_number ilike ? OR asmeth ilike ? OR bosal ilike ? OR walker ilike ? OR ets ilike ?", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
 		# sqlite3
-		where("reference_number like ? OR asmeth like ? OR bosal like ? OR walker like ? OR ets like ? OR ean like ?", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+		# where("reference_number like ? OR asmeth like ? OR bosal like ? OR walker like ? OR ets like ? OR ean like ?", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
 	end
 
 	# for asmet search
 	def self.psearch(query)
 		# Postgres
-		# where("reference_number ilike ? OR asmeth ilike ? OR bosal ilike ? OR walker ilike ? OR ets ilike ?", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
+		where("ean ilike ?", "%#{query}%")
 		# sqlite3
 		where("ean like ?", "%#{query}%")
 	end
